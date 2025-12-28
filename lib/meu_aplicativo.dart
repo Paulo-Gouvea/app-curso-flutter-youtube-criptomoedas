@@ -9,7 +9,7 @@ class MeuAplicativo extends StatelessWidget {
     return MaterialApp(
       title: 'MoedasBase',
       color: Colors.cyan,
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.indigo,
