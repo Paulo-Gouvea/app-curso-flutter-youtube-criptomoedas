@@ -15,11 +15,10 @@ class _MoedasPageState extends State<MoedasPage> {
   NumberFormat real = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
   List<Moeda> selecionadas = [];
   bool isSorted = false;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+
+  appBarDinamica(){
+    if (selecionadas.isEmpty){
+      return AppBar(
         title: Text('Cripto Moedas'),
         actions: [
           IconButton(
@@ -36,7 +35,34 @@ class _MoedasPageState extends State<MoedasPage> {
             icon: const Icon(Icons.swap_vert_circle)
           )
         ],
-      ),
+      );
+    } else {
+      return AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            setState(() {
+              selecionadas = [];
+            });
+          },
+        ),
+        title: Text('${selecionadas.length} selecionadas'),
+        backgroundColor: Colors.blueGrey[50],
+        elevation: 1,
+        iconTheme: IconThemeData(color: Colors.black87),
+        titleTextStyle: TextStyle(
+          color: Colors.black87,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),  
+      );
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBarDinamica(),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int moeda) {
           return ListTile(
@@ -76,7 +102,22 @@ class _MoedasPageState extends State<MoedasPage> {
         padding: EdgeInsets.all(16),
         separatorBuilder: (_, __) => Divider(), 
         itemCount: tabela.length
-      )
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: selecionadas.isNotEmpty
+        ? FloatingActionButton.extended(
+          onPressed: () {},
+          icon: Icon(Icons.star),
+          label: Text(
+            'FAVORITAR',
+            style: TextStyle(
+              letterSpacing: 0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+        : null
+      ,
     );
   }
 }
