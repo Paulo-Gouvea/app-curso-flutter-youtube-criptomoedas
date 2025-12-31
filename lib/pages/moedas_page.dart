@@ -11,15 +11,31 @@ class MoedasPage extends StatefulWidget {
 }
 
 class _MoedasPageState extends State<MoedasPage> {
-  final tabela = MoedaRepository.tabela;
+  List<Moeda> tabela = MoedaRepository.tabela;
   NumberFormat real = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
   List<Moeda> selecionadas = [];
+  bool isSorted = false;
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cripto Moedas'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (!isSorted) {
+                  tabela.sort((Moeda a, Moeda b) => a.nome.compareTo(b.nome));
+                  isSorted = true;
+                } else {
+                  tabela = tabela.reversed.toList();
+                }
+              });
+            }, 
+            icon: const Icon(Icons.swap_vert_circle)
+          )
+        ],
       ),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int moeda) {
