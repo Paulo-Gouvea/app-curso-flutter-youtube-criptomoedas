@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aula_1/models/moeda.dart';
+import 'package:flutter_aula_1/pages/moedas_detalhes_page.dart';
 import 'package:flutter_aula_1/repositories/moeda_repository.dart';
 import 'package:intl/intl.dart';
 
@@ -58,6 +59,15 @@ class _MoedasPageState extends State<MoedasPage> {
       );
     }
   }
+
+  mostrarDetalhes(Moeda moeda){
+    Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (_) => MoedasDetalhesPage(moeda: moeda)
+      )
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -97,6 +107,7 @@ class _MoedasPageState extends State<MoedasPage> {
                 : selecionadas.add(tabela[moeda]);
               });
             },
+            onTap: () => mostrarDetalhes(tabela[moeda]),
           );
         }, 
         padding: EdgeInsets.all(16),
