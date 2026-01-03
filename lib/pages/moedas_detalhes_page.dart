@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_aula_1/models/moeda.dart';
+import 'package:flutter_aula_1/widgets/block_button.dart';
 import 'package:intl/intl.dart';
 
 class MoedasDetalhesPage extends StatefulWidget {
@@ -131,22 +132,7 @@ class _MoedasDetalhesPageState extends State<MoedasDetalhesPage> {
             Container(
               alignment: Alignment.bottomCenter,
               margin: EdgeInsets.only(top: 24),
-              child: ElevatedButton(
-                onPressed: comprar, 
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.check),
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        'Comprar',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )
-                  ],
-                )
-              ),
+              child: BlockButton(icon: Icons.check, label: 'Comprar', onPressed: comprar)
             )
           ],
         ),
